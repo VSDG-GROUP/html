@@ -1,0 +1,87 @@
+
+
+
+
+
+
+<style>
+  .content-wrapper {
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  
+  .video-container { 
+    height: 0; 
+    max-width: 100%; 
+    overflow: hidden; 
+    padding-bottom: 56.25%; 
+    position: relative; 
+  
+    a {
+      border-bottom: 18px solid transparent;
+      border-left: 22px solid #000;
+      border-top: 18px solid transparent;
+      box-sizing: border-box;
+      height: 26px;
+      margin: -13px 0 0 -11px;
+      left: 50%;
+      position: absolute;
+      text-indent: -999em;
+      top: 50%;
+      width: 22px;
+  
+      &:hover {
+        border-left-color: #f00;
+      }
+    }
+  
+    img {
+      display: block;
+    }
+  
+    iframe, 
+    object, 
+    embed,
+    img { 
+      height: 100%; 
+      left: 0; 
+      position: absolute; 
+      top: 0; 
+      width: 100%; 
+    }
+  }
+</style>
+  <div class="content-wrapper">
+    <h1>Live Stream/Video</h1>
+    <p>Meetings held at the Airport Office Building are streamed live, below.</p>
+    <div class="video-container">
+      <img src="https://www.flynaples.com/wp-content/uploads/TAC-Joins-the-City-Council-for-Upcoming-Meeting-scaled.jpg" alt="">
+      <a href="https://vimeo.com/event/3958737/embed/84a66ab180" target="_blank">Play</a>
+    </div>
+  </div>
+
+<script>
+let playButton = document.querySelector('.video-container a');
+playButton.addEventListener('click', playVideo);
+
+function playVideo(e) {
+  e.preventDefault();
+  let videoContainer = this.parentNode;
+  let videoUrl = this.href;
+  let videoId = videoUrl.split('embed/')[1];
+  let iframeUrl;
+
+  if (videoUrl.includes('vimeo')) {
+    // vimeo
+    videoId = videoId.split('?')[0];
+    iframeUrl = `https://vimeo.com/event/3958737/embed/84a66ab180`;
+  } //else {
+    // youtube
+   // videoId = videoId.split('v=')[1];
+   // iframeUrl = `//www.youtube.com/embed/${videoId}?autoplay=1`;
+  //}
+
+  videoContainer.innerHTML = `<iframe src="${iframeUrl}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>`;
+}
+
+</script>
